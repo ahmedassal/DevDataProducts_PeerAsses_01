@@ -7,24 +7,70 @@
 
 library(shiny)
 
+
+
+glimpse(mtcars)
+# plot(mtcars$cyl, 1/mtcars$mpg)
+# plot(mtcars$disp, 1/mtcars$mpg)
+# plot(mtcars$disp, mtcars$hp)
+# plot(mtcars$cyl, mtcars$hp)
+# fit= lm(mtcars$hp ~ mtcars$disp)
+#predict(fit, newdata = c(500,200))
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("AHA Old Faithful Geyser Data"),
-
+  titlePanel("Car Perfromance Predictor"),
+  
+  
   # Sidebar with a slider input for number of bins
-  sidebarLayout(
+  sidebarLayout(position = "right",
+    
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      radioButtons("predictBy",label = h4("Predict by:"),
+                   choices = list("Cylinders" = 1, 
+                                  "Displacement" = 2),
+                   selected = 1),
+      
+      radioButtons("cyl",label = h4("Number of Cylinders:"),
+                  choices = list("4 Cylinders" = 4, 
+                                 "6 Cylinders" = 6, 
+                                 "8 Cylinders" = 8),
+                  selected = 4),
+      
+#       numericInput('cyl', "Number of Cylinders:", 4, min = 4, max = 8, step = 2),
+      
+      numericInput('disp', 'Displacement (cubic inches)', 1300, min = 100, max = 7000, step = 100),
+      submitButton('Submit'),
+      tags$br(),
+      tags$br()
+      
+      
+      
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      img(src="http://www.infinitegarage.com/wp-content/uploads/2013/07/hot-rod-engine.jpg"),
+      tabsetPanel(
+        tabPanel("Plot", 
+                 plotOutput("distPlot")
+            ), 
+        tabPanel("Results",
+                  h3('Results of prediction'),
+                  h4('You entered'),
+                  verbatimTextOutput('disp'),
+                  h4('Which resulted in a prediction of the following horsepower:'),
+                  textOutput("prediction")
+               
+            ), 
+        tabPanel("Table", 
+                 tableOutput("table")
+            )
+          ),
+                
+
+        a("https://github.com/ahmedassal/DevDataProducts_PeerAsses_01")
+      
+      )
     )
-  )
 ))
