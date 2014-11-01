@@ -7,15 +7,6 @@
 
 library(shiny)
 
-
-
-glimpse(mtcars)
-# plot(mtcars$cyl, 1/mtcars$mpg)
-# plot(mtcars$disp, 1/mtcars$mpg)
-# plot(mtcars$disp, mtcars$hp)
-# plot(mtcars$cyl, mtcars$hp)
-# fit= lm(mtcars$hp ~ mtcars$disp)
-#predict(fit, newdata = c(500,200))
 shinyUI(fluidPage(
 
   # Application title
