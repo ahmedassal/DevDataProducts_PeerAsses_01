@@ -5,6 +5,7 @@
 # http://shiny.rstudio.com
 #
 
+require(shiny)
 library(shiny)
 
 shinyUI(fluidPage(
@@ -34,9 +35,6 @@ shinyUI(fluidPage(
       submitButton('Submit'),
       tags$br(),
       tags$br()
-      
-      
-      
     ),
 
     # Show a plot of the generated distribution
@@ -48,20 +46,17 @@ shinyUI(fluidPage(
             ), 
         tabPanel("Results",
                   h3('Results of prediction'),
-                  h4('You entered'),
+                  h4('You chose to '),
                   verbatimTextOutput('disp'),
                   h4('Which resulted in a prediction of the following horsepower:'),
                   textOutput("prediction")
                
             ), 
         tabPanel("Table", 
-                 tableOutput("table")
-            )
+                 tableOutput("table"))
           ),
-                
-
         a("https://github.com/ahmedassal/DevDataProducts_PeerAsses_01")
       
       )
-    )
+  )
 ))

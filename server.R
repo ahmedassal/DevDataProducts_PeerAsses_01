@@ -47,10 +47,22 @@ shinyServer(function(input, output) {
   })
   
   output$prediction <- renderText({
-    model <- getModel()
+    model <<- getModel()
+    if (!is.null(model)){
+      #predictResults()
+      paste(round(predictResults()), "hp")
+    }
+    else{
+      paste("No valid input!")
+    }
     
-    #predictResults()
-    paste(round(predictResults()), "hp", input$predictBy)
+  })
+  
+  output$disp <- renderText({
+    predictByText = if(input$predictBy==1){"Cylinders"} else {"Displacement"}
+    predictionValue = if(input$predictBy==1){input$cyl} else {input$disp}
+    predictionUnits = if(input$predictBy==1){"Cylinders"} else {"cubic inches"}
+    paste("Predict by", predictByText, "for a vehicle of", predictionValue, predictionUnits)
     
   })
   
@@ -63,11 +75,18 @@ shinyServer(function(input, output) {
     # draw the histogram with the specified number of bins
     
     #plot(model)
-    scatterplot(hp ~ disp | cyl, data=mtcars,
-                xlab="Weight of Car", ylab="Miles Per Gallon",
-                main="Car Performance",
-                labels=row.names(mtcars)) 
-
+    predictByVar = 
+      
+    if(input$predictBy==1){
+      plot(hp ~ mtcars$cyl, data=mtcars,
+           xlab="Cylinders", ylab="Horsepower",
+           main="Car Performance")
+    } 
+    else {
+      plot(hp ~ mtcars$disp, data=mtcars,
+           xlab="Displacement", ylab="Horsepower",
+           main="Car Performance")
+    }
   })
 
 })

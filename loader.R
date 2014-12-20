@@ -13,7 +13,12 @@ predictPerformance <- function(cyl = 4, displacement = 100, predictBy = 2){
   else if (predictBy == 2){
     model <- lm(hp~disp, data = mtcars)  
   }
-
-  model
+  if (!is.null(model)){
+    model  
+  }
+  else{
+    null
+  }
+  
 }
 
