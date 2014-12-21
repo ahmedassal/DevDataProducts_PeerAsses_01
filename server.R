@@ -19,27 +19,30 @@ shinyServer(function(input, output) {
   
   getModel <-reactive({
     
-    predictPerformance(cyl = input$cyl, displacement = input$disp, predictBy = input$predictBy)  
+    predictPerformance(cyl = input$cyl, disp = input$disp, predictBy = input$predictBy)  
     
   })
   inp <- reactive({
     if(input$predictBy == 1){
-      return(input$cyl)
+      return(as.numeric(input$cyl))
     }
     else if (input$predictBy == 2){
       return(input$disp)
     }
   })
   predictResults <- reactive({
+    #new.data = data.frame(cyl=as.numeric(input$cyl), disp = input$disp)
     if(input$predictBy == 1){
       new.data.cyl = data.frame(cyl = c(inp()))  
       return(predict(model, new.data.cyl))
+      #return(predict(model, new.data))
       #return(as.numeric(input$cyl))
       
     }
     else if (input$predictBy == 2){
       new.data.disp = data.frame(disp = c(inp())) 
       return(predict(model, new.data.disp))
+      #return(predict(model, new.data))
     }
     #predict(model, new.data)
     #

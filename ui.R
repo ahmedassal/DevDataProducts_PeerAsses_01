@@ -18,6 +18,8 @@ shinyUI(fluidPage(
   sidebarLayout(position = "right",
     
     sidebarPanel(
+      h4("Documentation"),
+      p("Test"),
       radioButtons("predictBy",label = h4("Predict by:"),
                    choices = list("Cylinders" = 1, 
                                   "Displacement" = 2),
@@ -51,9 +53,9 @@ shinyUI(fluidPage(
                   h4('Which resulted in a prediction of the following horsepower:'),
                   textOutput("prediction")
                
-            ), 
-        tabPanel("Table", 
-                 tableOutput("table"))
+            )#, 
+#         tabPanel("Table", 
+#                  tableOutput("table"))
           ),
         a("https://github.com/ahmedassal/DevDataProducts_PeerAsses_01")
       
