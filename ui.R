@@ -19,7 +19,7 @@ shinyUI(fluidPage(
     
     sidebarPanel(
       h4("Documentation"),
-      p("Test"),
+      p("Please choose whether you want to predict by number of cylinders or the displacement volume."),
       radioButtons("predictBy",label = h4("Predict by:"),
                    choices = list("Cylinders" = 1, 
                                   "Displacement" = 2),
@@ -43,17 +43,18 @@ shinyUI(fluidPage(
     mainPanel(
       img(src="http://www.infinitegarage.com/wp-content/uploads/2013/07/hot-rod-engine.jpg"),
       tabsetPanel(
-        tabPanel("Plot", 
-                 plotOutput("distPlot")
-            ), 
-        tabPanel("Results",
+        tabPanel("Prediction",
                   h3('Results of prediction'),
                   h4('You chose to '),
                   verbatimTextOutput('disp'),
                   h4('Which resulted in a prediction of the following horsepower:'),
-                  textOutput("prediction")
+                  textOutput("prediction")),
+         
+         tabPanel("Plot", 
+                    plotOutput("distPlot")
+           )
                
-            )#, 
+            #, 
 #         tabPanel("Table", 
 #                  tableOutput("table"))
           ),
